@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { BreathingCoach } from './components/BreathingCoach'
-import { Controls } from './components/Controls'
+import { Controls, type ThemeKey } from './components/Controls'
 import './styles/app.css'
 
 function App() {
@@ -18,8 +19,10 @@ function App() {
     onCircleClick,
   } = BreathingCoach()
 
+  const [selectedTheme, setSelectedTheme] = useState<ThemeKey>('sky')
+
   return (
-    <div className="app">
+    <div className="app" data-theme={selectedTheme}>
       <div className="breathing-container">
         <Controls
           sessionState={sessionState}
@@ -31,8 +34,10 @@ function App() {
           ringProgress={ringProgress}
           selectedSession={selectedSession}
           selectedPattern={selectedPattern}
+          selectedTheme={selectedTheme}
           onSessionChange={setSelectedSession}
           onPatternChange={setSelectedPattern}
+          onThemeChange={setSelectedTheme}
           onCircleClick={onCircleClick}
         />
       </div>

@@ -1,6 +1,8 @@
 import type { PatternKey, SessionKey, SessionState } from './BreathingCoach';
 import { useMemo } from 'react';
 
+export type ThemeKey = 'sky' | 'wv' | 'joshua';
+
 interface ControlsProps {
   sessionState: SessionState;
   phaseLabel: string;
@@ -11,8 +13,10 @@ interface ControlsProps {
   ringProgress: number;
   selectedSession: SessionKey;
   selectedPattern: PatternKey;
+  selectedTheme: ThemeKey;
   onSessionChange: (v: SessionKey) => void;
   onPatternChange: (v: PatternKey) => void;
+  onThemeChange: (v: ThemeKey) => void;
   onCircleClick: () => void;
 }
 
@@ -29,6 +33,12 @@ const patternOptions: { value: PatternKey; label: string }[] = [
   { value: 'calm', label: 'Calm (5 in, 5 out)' },
 ];
 
+const themeOptions: { value: ThemeKey; label: string }[] = [
+  { value: 'sky', label: 'Sky' },
+  { value: 'wv', label: 'Dolly Sods' },
+  { value: 'joshua', label: 'Joshua Tree' },
+];
+
 export function Controls({
   sessionState,
   phaseLabel,
@@ -39,8 +49,10 @@ export function Controls({
   ringProgress,
   selectedSession,
   selectedPattern,
+  selectedTheme,
   onSessionChange,
   onPatternChange,
+  onThemeChange,
   onCircleClick,
 }: ControlsProps) {
   const isRunning = sessionState === 'running';
@@ -124,6 +136,20 @@ export function Controls({
             aria-label="Breathing pattern"
           >
             {patternOptions.map(o => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="select-wrap">
+          <select
+            className="select"
+            value={selectedTheme}
+            onChange={e => onThemeChange(e.target.value as ThemeKey)}
+            aria-label="Theme"
+          >
+            {themeOptions.map(o => (
               <option key={o.value} value={o.value}>
                 {o.label}
               </option>
