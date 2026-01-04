@@ -1,0 +1,325 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  background: linear-gradient(135deg, #87ceeb 0%, #e0f6ff 50%, #b6e5f8 100%);
+}
+
+/* Full viewport background */
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: linear-gradient(135deg, #87ceeb 0%, #e0f6ff 50%, #b6e5f8 100%);
+}
+
+/* Main container - circular design */
+.breathing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Phase display */
+.phase-display {
+  text-align: center;
+}
+
+.phase-label {
+  font-size: 3rem;
+  font-weight: 300;
+  color: #2c5282;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.countdown {
+  font-size: 5rem;
+  font-weight: 200;
+  color: #2c5282;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.primary-controls {
+  display: flex;
+  justify-content: center;
+}
+
+.running-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Circular breathing button */
+.breath-button {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+  color: #2c5282;
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  box-shadow: 0 8px 32px rgba(44, 82, 130, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+}
+
+ .breath-button .button-content {
+  position: absolute;
+  inset: 0;
+  display: block;
+ }
+
+ .breath-button .button-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+ }
+
+ .breath-button .button-layer .button-text {
+  margin-bottom: 0;
+ }
+
+ .breath-button .button-layer-current {
+  opacity: 1;
+ }
+
+ .breath-button .button-layer-next {
+  opacity: 0;
+ }
+
+ .breath-button .button-content.crossfade .button-layer-current {
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+ }
+
+ .breath-button .button-content.crossfade .button-layer-next {
+  transition: opacity 0.3s ease-in 0.2s;
+  opacity: 1;
+ }
+
+.progress-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(-1) rotate(271.5deg);
+}
+
+.progress-ring-bg {
+  fill: transparent;
+  stroke: rgba(44, 82, 130, 0.12);
+  stroke-width: 10;
+}
+
+.progress-ring-fg {
+  fill: transparent;
+  stroke: rgba(44, 82, 130, 0.55);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+.breath-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(44, 82, 130, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.breath-button:focus-visible {
+  box-shadow: 0 0 0 4px rgba(135, 206, 235, 0.5);
+}
+
+.breath-button:active {
+  transform: scale(0.98);
+  transition: all 0.1s ease;
+}
+
+.breath-button .button-text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.breath-button .button-countdown {
+  font-size: 3rem;
+  font-weight: 200;
+  color: #2c5282;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.breath-button .button-text.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+.breath-button .button-countdown.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+.breath-button .button-countdown.fade-dim {
+  opacity: 0.35;
+  transition: opacity 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* Dropdowns */
+.dropdown-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-wrap {
+  position: relative;
+}
+
+.select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid rgba(44, 82, 130, 0.75);
+  transform: translateY(-35%);
+  pointer-events: none;
+}
+
+.select {
+  appearance: none;
+  border: 1px solid rgba(44, 82, 130, 0.25);
+  background: rgba(255, 255, 255, 0.85);
+  color: #2c5282;
+  border-radius: 999px;
+  padding: 0.75rem 2.5rem 0.75rem 1.25rem;
+  font-size: 1rem;
+  line-height: 1;
+  box-shadow: 0 6px 20px rgba(44, 82, 130, 0.12);
+  cursor: pointer;
+}
+
+.select:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(135, 206, 235, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .breathing-container {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+    width: calc(100% - 2rem);
+  }
+  
+  .phase-label {
+    font-size: 2rem;
+  }
+  
+  .countdown {
+    font-size: 3rem;
+  }
+  
+  .btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    min-width: 100px;
+  }
+  
+  .running-controls {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .toggle-slider,
+  .toggle-slider::before {
+    transition: none;
+  }
+  
+  .btn:hover {
+    transform: none;
+  }
+}
