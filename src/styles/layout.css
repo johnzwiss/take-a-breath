@@ -1,0 +1,43 @@
+.fullscreen-toggle {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.35);
+  color: var(--button-text);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 2;
+  backdrop-filter: blur(6px);
+}
+
+.fullscreen-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.fullscreen-toggle:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px var(--shadow-strong);
+}
+
+.fullscreen-toggle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--focus);
+}
+
+@media (max-width: 480px) {
+  .fullscreen-toggle {
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+  }
+}
