@@ -273,6 +273,7 @@ export function BreathingCoach() {
 
   return {
     sessionState,
+    stepIndex,
     countdown,
     isTransitioning,
     isContinuous,
