@@ -116,6 +116,7 @@ export function BreathingCoach() {
   const sessionRemainingMs = sessionTotalMs === null ? null : Math.max(0, sessionTotalMs - sessionElapsedMs);
   const sessionRemainingSec = sessionRemainingMs === null ? null : Math.ceil(sessionRemainingMs / 1000);
 
+  // Countdown rounds down from the remaining milliseconds while staying at least 1.
   const computeCountdown = (durationSec: number, startMs: number | null) => {
     if (startMs === null) {
       return durationSec;
@@ -150,6 +151,7 @@ export function BreathingCoach() {
   const beginPhaseTransition = useCallback(() => {
     const nextIndex = stepIndex + 1;
     pendingStepIndex.current = nextIndex >= activeSteps.length ? 0 : nextIndex;
+    // Anchor the next phase timer to the fade start so the first second doesn't linger.
     transitionStartMs.current = Date.now();
     setIsTransitioning(true);
   }, [activeSteps.length, stepIndex]);

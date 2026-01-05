@@ -79,6 +79,7 @@ export function Controls({
   const clampedProgress = Math.min(1, Math.max(0, ringProgress));
   const radius = 118;
   const circumference = 2 * Math.PI * radius;
+  // Higher offset hides more of the ring to show countdown direction.
   const dashOffset = circumference * (1 - clampedProgress);
 
   return (

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { BreathingCoach } from './components/BreathingCoach'
 import { Controls, type ThemeKey } from './components/Controls'
-import './styles/app.css'
 
 function App() {
   const {
