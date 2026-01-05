@@ -1,7 +1,13 @@
-.fullscreen-toggle {
+.corner-actions {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
+  display: flex;
+  gap: 0.6rem;
+  z-index: 2;
+}
+
+.corner-button {
   width: 44px;
   height: 44px;
   border-radius: 999px;
@@ -13,30 +19,37 @@
   cursor: pointer;
   opacity: 0.7;
   transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  z-index: 2;
   backdrop-filter: blur(6px);
 }
 
-.fullscreen-toggle svg {
+.corner-button.is-active {
+  opacity: 0.95;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.corner-button svg {
   width: 20px;
   height: 20px;
 }
 
-.fullscreen-toggle:hover {
+.corner-button:hover {
   opacity: 1;
   transform: translateY(-1px);
   box-shadow: 0 10px 24px var(--shadow-strong);
 }
 
-.fullscreen-toggle:focus-visible {
+.corner-button:focus-visible {
   outline: none;
   box-shadow: 0 0 0 4px var(--focus);
 }
 
 @media (max-width: 480px) {
-  .fullscreen-toggle {
+  .corner-actions {
     top: 1rem;
     right: 1rem;
+  }
+
+  .corner-button {
     width: 40px;
     height: 40px;
   }
