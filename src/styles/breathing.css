@@ -1,0 +1,147 @@
+.breath-button {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--button-bg-start) 0%, var(--button-bg-end) 100%);
+  color: var(--button-text);
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  box-shadow: 0 8px 32px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+}
+
+.breath-button .button-content {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.breath-button .button-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.breath-button .button-layer .button-text {
+  margin-bottom: 0;
+}
+
+.breath-button .button-layer-current {
+  opacity: 1;
+}
+
+.breath-button .button-layer-next {
+  opacity: 0;
+}
+
+.breath-button .button-content.crossfade .button-layer-current {
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+}
+
+.breath-button .button-content.crossfade .button-layer-next {
+  transition: opacity 0.3s ease-in 0.2s;
+  opacity: 1;
+}
+
+.progress-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(-1) rotate(271.5deg);
+}
+
+.progress-ring-bg {
+  fill: transparent;
+  stroke: var(--ring-bg);
+  stroke-width: 10;
+}
+
+.progress-ring-fg {
+  fill: transparent;
+  stroke: var(--ring-fg);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+.breath-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px var(--shadow-strong);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.breath-button:focus-visible {
+  box-shadow: none;
+}
+
+.breath-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.breath-button:active {
+  transform: scale(0.98);
+  transition: all 0.1s ease;
+}
+
+.breath-button .button-text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.breath-button .button-countdown {
+  font-size: 3rem;
+  font-weight: 200;
+  color: var(--button-text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 4px var(--text-shadow);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breath-button,
+  .progress-ring-fg,
+  .breath-button .button-text,
+  .breath-button .button-countdown,
+  .breath-button .button-content.crossfade .button-layer-current,
+  .breath-button .button-content.crossfade .button-layer-next {
+    transition: none;
+    animation: none;
+  }
+
+  .breath-button:hover {
+    transform: none;
+  }
+}
